@@ -1,25 +1,18 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import currencyStore from '../../state/store';
 
-// eslint-disable-next-line react/prop-types
-const Navbar = ({ onSearch, onCurrencyChange, setCurrency }) => {
-    const [searchTerm, setSearchTerm] = useState('');
+function Navbar() {
+    const { setCurrency } = currencyStore();
+    const navigate = useNavigate();
 
-    // Yeh function search term ko parent component ko bhejta hai
-    const handleSearch = () => {
-        onSearch(searchTerm);
-    };
-
-    // Yeh function currency ko parent component ko bhejta hai
-    const handleCurrencyChange = (event) => {
-        const selectedCurrency = event.target.textContent.toLowerCase();
-        onCurrencyChange(selectedCurrency);
-    };
+    function goToHome() {
+        navigate('/');
+    }
 
     return (
-        <div className="navbar bg-base-100 z-50 relative">
+        <div className="navbar bg-yellow-300 text-black shadow-lg">
             <div className="navbar-start">
-                <div className="dropdown dropdown-hover">
+                <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -36,26 +29,16 @@ const Navbar = ({ onSearch, onCurrencyChange, setCurrency }) => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1000] mt-3 w-52 p-2 shadow-lg absolute">
-                        <li onClick={()=> setCurrency('inr')}><a onClick={handleCurrencyChange} className="hover:bg-gray-200 p-2 rounded">INR</a></li>
-                        <li onClick={()=> setCurrency('usd')}><a onClick={handleCurrencyChange} className="hover:bg-gray-200 p-2 rounded">USD</a></li>
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                        <li><a onClick={() => setCurrency('inr')}>INR</a></li>
+                        <li><a onClick={() => setCurrency('usd')}>USD</a></li>
                     </ul>
                 </div>
             </div>
-            <div className="navbar-center">
-                <a className="navbar-brand">COIN DEKHO</a> {/* Yeh text capital letters mein hai */}
+            <div onClick={goToHome} className="navbar-center">
+                <a className="btn btn-ghost text-xl">Coin Dekho</a>
             </div>
             <div className="navbar-end">
-                <div className="search-bar">
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="input input-bordered"
-                    />
-                    <button onClick={handleSearch} className="btn btn-primary ml-2">Search</button>
-                </div>
                 <button className="btn btn-ghost btn-circle">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -88,6 +71,54 @@ const Navbar = ({ onSearch, onCurrencyChange, setCurrency }) => {
                     </div>
                 </button>
             </div>
+            <style jsx>{`
+                @keyframes fadeInDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                @keyframes slideIn {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-100%);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+
+                .navbar {
+                    animation: fadeInDown 1s ease-in-out;
+                }
+
+                .navbar-start, .navbar-center, .navbar-end {
+                    animation: slideIn 1s ease-in-out;
+                }
+
+                .navbar-start {
+                    animation-delay: 0.5s;
+                }
+
+                .navbar-center {
+                    animation-delay: 1s;
+                }
+
+                .navbar-end {
+                    animation-delay: 1.5s;
+                }
+
+                .btn:hover {
+                    transform: scale(1.1);
+                    transition: transform 0.3s ease-in-out;
+                }
+            `}</style>
         </div>
     );
 }

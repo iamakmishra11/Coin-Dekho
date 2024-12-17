@@ -12,9 +12,17 @@
   "dependencies": {
     "@tanstack/react-query": "^5.61.0",
     "axios": "^1.7.7",
+    "chart.js": "^4.4.7",
+    "html-react-parser": "^5.2.0",
     "react": "^18.3.1",
+    "react-chart": "^0.0.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-content-loader": "^7.0.2",
     "react-dom": "^18.3.1",
-    "react-query": "^3.39.3"
+    "react-error-boundary": "^4.1.2",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^7.0.1",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
