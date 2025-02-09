@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: coin-dekho
+    env: static
+    staticPublishPath: dist
+    buildCommand: npm run build
